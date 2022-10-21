@@ -35,6 +35,19 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
+            <StackLayout>
+                <HorizontalStackLayout>
+                    <Label 
+                    Text="Board Size"
+                 />
+                </HorizontalStackLayout>
+                
+               
+
+
+            </StackLayout>
+
+
         </VerticalStackLayout>
     </ScrollView>
 
