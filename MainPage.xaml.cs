@@ -17,9 +17,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		makeBoard(3);
-
     }
-
     void OnEntryTextChanged(object sender, EventArgs e){
 		string inputText = sizeInput.Text;
 		int inputInt = 3;
@@ -68,26 +66,22 @@ public partial class MainPage : ContentPage
 		Board.RowDefinitions = rowDefinitions;
 		Board.ColumnDefinitions = columnDefinitions;
 
-		Button square = new Button();
-		square.Command = moveMade;
-		//square.Clicked += async (sender, args) => await clickedSquare;
-
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
 			{
-				Board.Add(new BoxView {
-					Color = Colors.AliceBlue,
-				},i,j);
-				// add buttons with labels on them?
-				Board.Add(new Button {
-						ClassId = "square",
-						Text = ""
-						
-						
-				},i,j);
+				Button square = new Button();
+				square.Text = "";
+				square.ClassId = $"square{i}{j}";
+                square.Clicked += OnButtonClicked;
+				square.CornerRadius = 0;
+				square.BorderColor = Colors.Black;
+				square.FontSize = 32;
+				
+                // add buttons with
+                Board.Add(square,i,j);
 			}
-		}	
+		}
 	}
 
 
@@ -114,12 +108,12 @@ public partial class MainPage : ContentPage
 		makeBoard(inputInt);
 
         SizeLabel.Text = $"Board Size: {getBoardSize()}";
-    }
-
-     public ICommand moveMade { get; set ; }
+    }	
     private void OnButtonClicked(object sender, EventArgs args)
     {
-        CurentTurn.TextColor = Colors.Red;	
+        var button =(Button)sender;
+		var classID = button.ClassId;
+		button.Text = $"{button.ClassId}";
     }
 }
 
