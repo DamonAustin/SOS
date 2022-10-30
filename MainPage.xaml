@@ -7,24 +7,13 @@
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            
 
           
-            <StackLayout>
-                <HorizontalStackLayout x:Name="SizeInputGroup"
-                    Spacing="5"
-                    >
-                    <Label x:Name="SizeLabel"
-                        Text="Board Size:"
-                        
-                    />
-                    <Entry x:Name="sizeInput"
-                           TextChanged="sizeInput_TextChanged"
-                        Placeholder="3"
-                        MaxLength="2"
-                        
-                    />
-                </HorizontalStackLayout>
+            <HorizontalStackLayout>
+               
 
                 <HorizontalStackLayout x:Name="GameModeGroup"
                     Spacing="5"
@@ -49,17 +38,85 @@
 
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout x:Name="BoardGroup">
-                    <Grid x:Name="Board"
-                          >
+                <HorizontalStackLayout x:Name="SizeInputGroup"
+                    Spacing="5"
+                    >
+                    <Label x:Name="SizeLabel"
+                        Text="Board Size:"
                         
-                    </Grid>
-                    
-                    
+                    />
+                    <Entry x:Name="sizeInput"
+                           TextChanged="sizeInput_TextChanged"
+                        Placeholder="3"
+                        MaxLength="2"
+                        
+                    />
                 </HorizontalStackLayout>
-            </StackLayout>
+                
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <VerticalStackLayout>
+                    <Label>
+                        Blue Player
+                    </Label>
+                    <RadioButton x:Name="BlueSMove"
+                                 Content="S"
+                                 GroupName="BlueMove"
+                                 Value="true"
+                                 CheckedChanged="GameMode_CheckedChanged"
+                                 
+                                 />
+                    <RadioButton x:Name="BlueOMove"
+                                 Content="O"
+                                 GroupName="BlueMove"
+                                 CheckedChanged="GameMode_CheckedChanged"
+                                 
+                                 />
+                </VerticalStackLayout>
 
 
+                <VerticalStackLayout x:Name="BoardGroup"
+                                       >
+                    <Grid x:Name="Board"
+                          HeightRequest="400"
+                          WidthRequest="400"
+                          IsVisible="True"
+                        >
+                    </Grid>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label>
+                        Red Player
+                    </Label>
+                    <RadioButton x:Name="RedSMove"
+                                 Content="S"
+                                 GroupName="RedMove"
+                                 Value="true"
+                                 CheckedChanged="GameMode_CheckedChanged"
+                                 
+                                 />
+                    <RadioButton x:Name="RedOMove"
+                                 Content="O"
+                                 GroupName="RedMove"
+                                 CheckedChanged="GameMode_CheckedChanged"
+                                 
+                                 />
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label x:Name="CurentTurn"
+                    >Current turn:</Label>
+                <Button x:Name="NewGame"
+                        Text="New Game"
+                        Clicked="OnButtonClicked"
+                        IsEnabled="True"
+                        >
+
+                </Button>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 

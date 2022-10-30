@@ -1,6 +1,10 @@
-﻿using Microsoft.Maui.Platform;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Platform;
 using SOS.GameLogic;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SOS;
 
@@ -12,6 +16,7 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
 		InitializeComponent();
+		makeBoard(3);
 
     }
 
@@ -50,21 +55,42 @@ public partial class MainPage : ContentPage
 
 	public void makeBoard(int size)
 	{
-		Grid board = new Grid();
-		Label label = new Label();
-		label.Text = size.ToString();
-        board.SetRowSpan(label, size - 1);
-        board.SetColumnSpan(label, size - 1);
-        BoxView test = new BoxView();
+        RowDefinition row = new RowDefinition { Height = new GridLength(1,GridUnitType.Star)};
+        ColumnDefinition column = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
+        RowDefinitionCollection rowDefinitions = new RowDefinitionCollection();
+        ColumnDefinitionCollection columnDefinitions = new ColumnDefinitionCollection();
 
-        for (int i = 0; i < size-1; i++){
-			for (int j = 0; j < size - 1; j++){
-				
-				
+        for (int i = 0; i < size; i++)
+		 {
+			 rowDefinitions.Add(row);
+			 columnDefinitions.Add(column);
+		 }
+		Board.RowDefinitions = rowDefinitions;
+		Board.ColumnDefinitions = columnDefinitions;
+
+		Button square = new Button();
+		square.Command = moveMade;
+		//square.Clicked += async (sender, args) => await clickedSquare;
+
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				Board.Add(new BoxView {
+					Color = Colors.AliceBlue,
+				},i,j);
+				// add buttons with labels on them?
+				Board.Add(new Button {
+						ClassId = "square",
+						Text = ""
+						
+						
+				},i,j);
 			}
-		}
-		Board = board;
+		}	
 	}
+
+
 	//Triggers when one of the GameMode Radio Buttons are changed.
 	private void GameMode_CheckedChanged(object sender, CheckedChangedEventArgs e){
 		setGameMode(simpleRadioBtn.IsChecked);
@@ -88,6 +114,12 @@ public partial class MainPage : ContentPage
 		makeBoard(inputInt);
 
         SizeLabel.Text = $"Board Size: {getBoardSize()}";
+    }
+
+     public ICommand moveMade { get; set ; }
+    private void OnButtonClicked(object sender, EventArgs args)
+    {
+        CurentTurn.TextColor = Colors.Red;	
     }
 }
 
