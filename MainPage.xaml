@@ -49,14 +49,21 @@
 
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout x:Name="BoardGroup">
+                <StackLayout x:Name="BoardGroup"
+                                       >
+                    <Label x:Name="BoardLabel"
+                            Text="Board Size"     
+                    />
                     <Grid x:Name="Board"
-                          >
-                        
+                          HeightRequest="400"
+                          WidthRequest="400"
+                          IsVisible="True"
+                          
+                        >
                     </Grid>
-                    
-                    
-                </HorizontalStackLayout>
+
+
+                </StackLayout>
             </StackLayout>
 
 
